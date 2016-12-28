@@ -4,8 +4,9 @@
   "description": "Bus UI",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "build": "webpack build",
+    "start": "NODE_ENV=development node server/index.js",
+    "start:prod": "NODE_ENV=production npm run build:prod && node server/index",
+    "build:prod": "webpack --config ./webpack.config.prod",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:lint": "eslint . --ext .js --ext .jsx"
   },
@@ -38,6 +39,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.3.13",
+    "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
     "css-loader": "^0.26.1",

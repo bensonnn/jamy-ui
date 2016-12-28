@@ -3,24 +3,20 @@ const path = require('path')
 const port = process.env.PORT || 8080
 const app = express()
 
-var webpack = require('webpack');
-var webpackConfig = require('../webpack.config');
-var compiler = webpack(webpackConfig);
-
-
-// serve static assets normally
 app.use(express.static('public'))
 
+if (process.env.NODE_ENV === 'development') {
+    var webpack = require('webpack');
+    var webpackConfig = require('../webpack.config.dev');
+    var compiler = webpack(webpackConfig);
+    app.use(require("webpack-dev-middleware")(compiler, {
+        log: console.info,
+        publicPath: webpackConfig.output.publicPath
+    }));
 
-app.use(require("webpack-dev-middleware")(compiler, {
-    log: console.info,
-    publicPath: webpackConfig.output.publicPath
-}));
+    app.use(require("webpack-hot-middleware")(compiler));
+}
 
-app.use(require("webpack-hot-middleware")(compiler));
-
-// handle every other route with index.html, which will contain
-// a script tag to your application's JavaScript file(s).
 app.get('*', function (request, response){
   response.sendFile(path.resolve('public', 'index.html'))
 })
