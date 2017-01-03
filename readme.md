@@ -1,4 +1,4 @@
-# Bus UI
+# Jamy UI
 
 ```shell
 $ npm i

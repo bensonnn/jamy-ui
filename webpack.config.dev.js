@@ -4,12 +4,12 @@ var webpack = require('webpack');
 module.exports = {
   entry: ['./client/js/index.js',
           './client/css/main.styl',
-          'webpack-hot-middleware/client?path=/__webpack_hmr'
+          'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000'
     ],
   output: {
-      filename: 'bundle.js',
-      path: path.join(__dirname, 'public/')
-   },
+    filename: 'bundle.js',
+    path: path.join(__dirname, 'public/')
+  },
   module: {
     loaders: [
       {
@@ -18,8 +18,8 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-          test: /\.styl$/,
-          loader: 'style-loader!css-loader!stylus-loader'
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader'
       }
     ],
     resolve: {
@@ -31,8 +31,13 @@ module.exports = {
     // Webpack 2.0 fixed this mispelling
     // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env':{
+        NODE_ENV: JSON.stringify('development')
+      }
+    })
   ],
   debug: true,
-  devtool: "#inline-source-map"
+  devtool: '#inline-source-map'
 };

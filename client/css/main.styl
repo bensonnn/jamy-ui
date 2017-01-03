@@ -1,1 +1,58 @@
 @import './skeleton.css'
+$gutter = 8px
+$mobile = 400px
+$tablet = 750px
+$desktop = 100px
+
+.header
+    a:first-child
+        font-family: 'Megrim', cursive;
+        font-size: 17px;
+        font-weight: bold;
+        letter-spacing: .5rem;
+        text-transform: none;
+    a
+        text-decoration none
+        text-transform uppercase
+        font-size 12px
+        font-weight 500
+        letter-spacing .2rem
+        text-decoration none
+        line-height 4.5rem
+        color #222
+        display block
+        text-align center
+        &:hover
+            color lighten(#222, 30)
+    .links
+        border-bottom: 1px solid #E1E1E1;
+        display flex
+        flex-direction column
+
+    @media (min-width: $mobile)
+        .links
+            flex-direction row
+            a
+                line-height 6.5rem
+                margin-right 6*$gutter
+
+// .track-container
+
+.track
+  display flex
+  border-bottom: 1px solid #E1E1E1;
+  height 20*$gutter
+  align-items center
+
+  .username
+    font-weight bold
+  .title
+    font-weight 200
+
+  .avatar
+    margin-right 2*$gutter
+    line-height 0
+    img
+      height 5*$gutter
+      width 5*$gutter
+      border-radius 4px

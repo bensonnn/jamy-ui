@@ -1,14 +1,37 @@
-import React, { Proptypes }    from "react";
+import React, { Proptypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class App extends React.Component {
+import { loadLatest } from '../ducks/tracks';
 
-    render() {
-      return (
-        <div>
-            <div className="row">
-                Index page
-            </div>
-        </div>
-      )
-    }
+import TrackContainer from '../components/TrackContainer';
+
+class IndexPage extends React.Component {
+
+  componentWillMount() {
+    this.props.loadLatest();
+  }
+  render() {
+    return (
+			<div>
+			  <div className="row">
+			    <TrackContainer tracks={ this.props.tracks } />
+	      </div>
+      </div>
+    );
+  };
 };
+
+function actions(dispatch) {
+  return bindActionCreators({
+    loadLatest
+  }, dispatch);
+};
+
+function mapStateToProps(state, props) {
+  return {
+    tracks: state.tracks.latest
+  };
+}
+
+export default connect(mapStateToProps, actions)(IndexPage);

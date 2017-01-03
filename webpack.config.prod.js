@@ -6,9 +6,9 @@ module.exports = {
           './client/css/main.styl'
     ],
   output: {
-      filename: 'bundle.js',
-      path: path.join(__dirname, 'public/')
-   },
+    filename: 'bundle.js',
+    path: path.join(__dirname, 'public/')
+  },
   module: {
     loaders: [
       {
@@ -17,13 +17,19 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-          test: /\.styl$/,
-          loader: 'style-loader!css-loader!stylus-loader'
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader'
       }
     ],
     resolve: {
       extensions: ['', '.js', '.jsx']
     }
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        NODE_ENV: JSON.stringify('production')
+      }
+    })
+  ]
 };

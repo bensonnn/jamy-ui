@@ -1,12 +1,16 @@
 import React, { Proptypes } from "react";
+import { Link } from 'react-router';
 
 export default class Header extends React.Component {
 
     render() {
       return (
         <div className='header'>
-            <div className="row">
-                <p>I'm a headerrrr</p>
+            <div className="links">
+                <Link to='/'>Jamy</Link>
+                <Link to='/latest'>Latest</Link>
+                <Link to='/popular'>Trending</Link>
+                <Link to='/about'>About</Link>
             </div>
         </div>
       )

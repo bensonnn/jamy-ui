@@ -1,16 +1,16 @@
 import React, { Proptypes }    from "react";
+import Header from './components/Header';
+import SoundManager from './components/SoundManager';
 
 export default class App extends React.Component {
 
-    render() {
-      return (
-        <div className='container'>
-            <div className="row">
-                <p>Header</p>
-                { this.props.children }
-                <p>footer</p>
-            </div>
-        </div>
-      )
-    }
+  render() {
+    return (
+      <div className="container">
+        <SoundManager />
+        <Header />
+          { this.props.children }
+      </div>
+    );
+  }
 };
