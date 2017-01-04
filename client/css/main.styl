@@ -5,7 +5,7 @@ $tablet = 750px
 $desktop = 100px
 
 .page
-  margin 3*$gutter 0 5*$gutter
+  margin 3*$gutter 0 7*$gutter
 
 .header
     .logo
@@ -64,11 +64,14 @@ $desktop = 100px
     display flex
     list-style none
     justify-content: center;
-    cursor pointer
     .active
       font-weight: bold
-    li
-      padding 2*$gutter
+      text-decoration: underline;
+    li > a
+      cursor pointer
+      display block
+      padding $gutter 2*$gutter
+      color: #222
 
 
 .track

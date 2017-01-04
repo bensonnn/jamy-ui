@@ -37,7 +37,7 @@ class IndexPage extends React.Component {
 			  <div className="page">
 			    <TrackContainer
             tracks={ this.props.tracks }
-            pageNumber={ this.props.location.query.p }
+            pageNumber={ this.props.location.query.p || 1 }
             total={ this.props.total / 20 }
             loadPage={ this.loadPage } />
 	      </div>
