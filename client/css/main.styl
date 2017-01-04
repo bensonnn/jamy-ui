@@ -4,13 +4,19 @@ $mobile = 400px
 $tablet = 750px
 $desktop = 100px
 
+.page
+  margin 3*$gutter 0 5*$gutter
+
 .header
-    a:first-child
-        font-family: 'Megrim', cursive;
-        font-size: 17px;
-        font-weight: bold;
-        letter-spacing: .5rem;
-        text-transform: none;
+    .logo
+      font-family: 'Megrim', cursive;
+      font-size: 17px;
+      font-weight: bold;
+      letter-spacing: .5rem;
+      text-transform: none;
+      border: 1px solid;
+      padding: 5px 6px 6px 9px;
+
     a
         text-decoration none
         text-transform uppercase
@@ -36,13 +42,51 @@ $desktop = 100px
                 line-height 6.5rem
                 margin-right 6*$gutter
 
-// .track-container
+.controls
+  position fixed
+  bottom 0
+  right 0
+  left 0
+  display flex
+  background white
+  border-top: 1px solid #E1E1E1;
+  align-items: center;
+
+  .fa
+    padding 2*$gutter
+    cursor pointer
+    transition color .2s
+    font-size 2rem
+    &:hover
+        color lighten(#222, 30)
+
+.pagination
+    display flex
+    list-style none
+    justify-content: center;
+    cursor pointer
+    .active
+      font-weight: bold
+    li
+      padding 2*$gutter
+
 
 .track
   display flex
   border-bottom: 1px solid #E1E1E1;
-  height 20*$gutter
+  height 18*$gutter
   align-items center
+
+  .right
+    display block
+    margin-left auto
+
+  .fa
+    cursor pointer
+    transition color .2s
+    &:hover
+        color lighten(#222, 30)
+
 
   .username
     font-weight bold
@@ -53,6 +97,6 @@ $desktop = 100px
     margin-right 2*$gutter
     line-height 0
     img
-      height 5*$gutter
-      width 5*$gutter
+      height 6*$gutter
+      width 6*$gutter
       border-radius 4px

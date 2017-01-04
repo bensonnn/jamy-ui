@@ -1,6 +1,7 @@
 import React, { Proptypes }    from "react";
 import Header from './components/Header';
 import SoundManager from './components/SoundManager';
+import Controls from './components/Controls';
 
 export default class App extends React.Component {
 
@@ -9,7 +10,8 @@ export default class App extends React.Component {
       <div className="container">
         <SoundManager />
         <Header />
-          { this.props.children }
+        <Controls />
+        { this.props.children }
       </div>
     );
   }

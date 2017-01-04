@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import React, { PropTypes } from "react";
+import FA from 'react-fontawesome'
+
 
 import TrackAvatar from './TrackAvatar';
 
@@ -7,7 +9,8 @@ export default class Track extends React.Component {
 
   static propTypes = {
     track: PropTypes.object.isRequired,
-    play: PropTypes.func.isRequired
+    play: PropTypes.func.isRequired,
+    isPlaying: PropTypes.boolean
   };
 
   render() {
@@ -20,7 +23,12 @@ export default class Track extends React.Component {
           <br/>
           <span className="title">{ track.title }</span>
         </div>
-        <button className="play" onClick={ () => { this.props.play(track) } }>Play</button>
+        { !this.props.isPlaying &&
+          <FA name='play'size='2x' className='right' onClick={ () => { this.props.play(track) } } />
+        }
+        { this.props.isPlaying &&
+          <FA name='pause' size='2x' className='right' onClick={ this.props.pause } />
+        }
       </div>
     );
   }

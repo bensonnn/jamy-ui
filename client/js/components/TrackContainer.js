@@ -2,19 +2,26 @@ import _ from 'lodash';
 import React, { PropTypes } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ReactPaginate from 'react-paginate';
 
 import Track from './Track';
 
-import { play } from '../ducks/playing';
+import { play, pause } from '../ducks/playing';
 
 class TrackContainer extends React.Component {
 
   static propTypes = {
-    tracks: PropTypes.arrayOf(PropTypes.object)
+    tracks: PropTypes.arrayOf(PropTypes.object),
+    track: PropTypes.object,
+    isPlaying: PropTypes.bool
   };
 
   play = (track) => {
     this.props.play(this.props.tracks, track);
+  }
+
+  handlePageClick = (page) => {
+    this.props.loadPage(page.selected + 1);
   }
 
   render() {
@@ -22,8 +29,17 @@ class TrackContainer extends React.Component {
     return (
       <div className="track-container">
           { this.props.tracks.map((track) => {
-            return <Track track={ track } play={ this.play } key={ track.id } />;
+            return <Track track={ track } play={ this.play } pause={ this.props.pause } isPlaying={ this.props.isPlaying && _.get(this.props, 'track.id') === track.id } key={ track.id } />;
           }) }
+
+          <ReactPaginate
+            pageCount={this.props.total }
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={1}
+            forcePage={ parseInt(this.props.pageNumber,10) - 1 }
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"} />
       </div>
     );
   }
@@ -31,16 +47,16 @@ class TrackContainer extends React.Component {
 
 function actions(dispatch) {
   return bindActionCreators({
-    play
+    play,
+    pause
   }, dispatch);
 };
 
-// function mapStateToProps(state, props) {
-//   return {
-//     track: state.playing.track,
-//     isPlaying: state.playing.isPlaying,
-//     playlist: state.playing.playlist
-//   };
-// }
+function mapStateToProps(state, props) {
+  return {
+    track: state.playing.track,
+    isPlaying: state.playing.isPlaying
+  };
+}
 
-export default connect(null, actions)(TrackContainer);
+export default connect(mapStateToProps, actions)(TrackContainer);

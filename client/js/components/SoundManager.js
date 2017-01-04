@@ -1,8 +1,11 @@
 import React, { PropTypes } from "react";
 import _ from 'lodash';
 import soundManger from '../../../node_modules/soundmanager2/script/soundmanager2-nodebug-jsmin';
+import Helmet from "react-helmet";
 
 import config from '../../../server/config';
+
+import { next } from '../ducks/playing';
 
 
 import { connect } from 'react-redux';
@@ -30,9 +33,8 @@ class SoundManager extends React.Component {
       url: `${track.stream_url}?client_id=${config.soundcloud}`,
       autoLoad: true,
       autoPlay: false,
-      onload: function() {
-      },
-      volume: 50
+      onfinish: this.props.next,
+      volume: 100
     }).play();
   }
 
@@ -48,32 +50,41 @@ class SoundManager extends React.Component {
     if (np.isPlaying && _.get(this, 'props.track.id') === _.get(np, 'track.id')) {
       console.log('resuming');
       this.soundManager.resume(np.track.id);
+      return;
     }
 
     if (!np.isPlaying && _.get(this, 'props.track.id') === _.get(np, 'track.id')) {
       console.log('pausing track');
       this.soundManager.pause(np.track.id);
+      return;
     }
 
-    if (_.get(this, 'props.track.id') !== _.get(np, 'track.id')) {
+    if (!!_.get(np, 'track.id') && _.get(this, 'props.track.id') !== _.get(np, 'track.id')) {
       console.log('new track!', np.track);
       soundManager.destroySound(this.props.track.id);
-      this.createSound(np.track)
+      this.createSound(np.track);
+      return;
     }
+
+    console.log('stopping');
+    soundManager.destroySound(this.props.track.id);
+
   }
 
 
 
   render() {
-    return null
+    if (!this.props.track) return null;
+    return <Helmet title={`${this.props.track.title}`} />
   }
 }
 
-// function actions(dispatch) {
-//   return bindActionCreators({
-//     loadLatest
-//   }, dispatch);
-// };
+function actions(dispatch) {
+  return bindActionCreators({
+    next
+  }, dispatch);
+};
+
 
 function mapStateToProps(state, props) {
   return {
@@ -83,4 +94,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps)(SoundManager);
+export default connect(mapStateToProps, actions)(SoundManager);
