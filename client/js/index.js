@@ -7,6 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import Index from './pages/Index';
 import About from './pages/About';
+import Popular from './pages/Popular';
 
 import rootReducer from './ducks';
 
@@ -24,7 +25,7 @@ const Render = () => {
               <IndexRedirect to="latest"/>
               <Route path="latest" component={Index} />
               <Route path="trending" component={App}/>
-              <Route path="popular" component={App}/>
+              <Route path="popular" component={Popular}/>
               <Route path="timemachine" component={App}/>
               <Route path="about" component={About}/>
           </Route>

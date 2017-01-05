@@ -13,6 +13,7 @@ const defaultState = {
 export default function reducer(state = defaultState, action = {}) {
 
   switch (action.type) {
+
   case LATEST_LOAD: {
     return {...state,
       latest: {
@@ -20,22 +21,39 @@ export default function reducer(state = defaultState, action = {}) {
         tracks: action.payload.tracks
       }
     }
-  }  
+  }
+
+  case POPULAR_LOAD: {
+    return {...state,
+      popular: {
+        total: action.payload.total,
+        tracks: action.payload.tracks
+      }
+    }
+  }
+
   default: return state;
   }
+
 }
 
 // Action Creators
-export function loadLatest(page) {
+export function loadLatest(p = 1 ) {
   return { type: LATEST_LOAD,
            api: config.latestRoute,
            query: {
-             p: page || 1
+             p
            },
            method: 'GET'
          };
 }
 
-export function loadPopular() {
-  return { type: POPULAR_LOAD };
+export function loadPopular(p = 1) {
+  return { type: POPULAR_LOAD,
+           api: config.popularRoute,
+           query: {
+             p
+           },
+           method: 'GET'
+         };
 }

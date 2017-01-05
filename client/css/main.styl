@@ -1,11 +1,12 @@
 @import './skeleton.css'
+@import './animations.styl'
 $gutter = 8px
 $mobile = 400px
 $tablet = 750px
 $desktop = 100px
 
 .page
-  margin 3*$gutter 0 7*$gutter
+  margin 2*$gutter 0 7*$gutter
 
 .header
     .logo
@@ -51,6 +52,9 @@ $desktop = 100px
   background white
   border-top: 1px solid #E1E1E1;
   align-items: center;
+  animation-name slide-up
+  animation-fill-mode both
+  animation-duration .5s
 
   .fa
     padding 2*$gutter
