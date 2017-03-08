@@ -32,7 +32,7 @@ class Controls extends React.Component {
           }
           <FA name='forward' onClick={ this.props.next } size='2x' />
 
-          <div><b>{ this.props.track.user.username }</b> - { this.props.track.title }</div>
+          <div>{ this.props.track.user.username } - <span className="title">{ this.props.track.title }</span></div>
       </div>
     );
   }

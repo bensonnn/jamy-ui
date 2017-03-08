@@ -24,6 +24,7 @@ class PopularPage extends React.Component {
 
   loadPage = (p) => {
     this.context.router.push({
+      pathname: this.context.router.location.pathname,
       query: {
         p
       }

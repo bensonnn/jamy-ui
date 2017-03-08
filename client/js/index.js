@@ -24,7 +24,7 @@ const Render = () => {
           <Route path="/" component={App}>
               <IndexRedirect to="latest"/>
               <Route path="latest" component={Index} />
-              <Route path="trending" component={App}/>
+              // <Route path="trending" component={App}/>
               <Route path="popular" component={Popular}/>
               <Route path="timemachine" component={App}/>
               <Route path="about" component={About}/>

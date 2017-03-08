@@ -10,7 +10,8 @@ export default class Track extends React.Component {
   static propTypes = {
     track: PropTypes.object.isRequired,
     play: PropTypes.func.isRequired,
-    isPlaying: PropTypes.boolean
+    isActive: PropTypes.bool.isRequired,
+    isPlaying: PropTypes.bool
   };
 
   render() {
@@ -24,10 +25,12 @@ export default class Track extends React.Component {
           <span className="title">{ track.title }</span>
         </div>
         { !this.props.isPlaying &&
-          <FA name='play'size='2x' className='right' onClick={ () => { this.props.play(track) } } />
+          <FA name='play'size='2x'
+              className={`right ${this.props.isActive ? 'active' : null}`}
+              onClick={ () => { this.props.play(track) } } />
         }
         { this.props.isPlaying &&
-          <FA name='pause' size='2x' className='right' onClick={ this.props.pause } />
+          <FA name='pause active' size='2x' className='right' onClick={ this.props.pause } />
         }
       </div>
     );

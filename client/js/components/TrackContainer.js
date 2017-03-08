@@ -29,7 +29,12 @@ class TrackContainer extends React.Component {
     return (
       <div className="track-container">
           { this.props.tracks.map((track) => {
-            return <Track track={ track } play={ this.play } pause={ this.props.pause } isPlaying={ this.props.isPlaying && _.get(this.props, 'track.id') === track.id } key={ track.id } />;
+            return <Track track={ track }
+                          play={ this.play }
+                          pause={ this.props.pause }
+                          isPlaying={ this.props.isPlaying && _.get(this.props, 'track.id') === track.id } key={ track.id }
+                          isActive={ _.get(this.props, 'track.id') === track.id }
+                          />;
           }) }
 
           <ReactPaginate

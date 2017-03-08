@@ -9,7 +9,7 @@ export default class App extends React.Component {
     return (
       <div className="container">
         <SoundManager />
-        <Header />
+        <Header location={ this.props.location } />
         <Controls />
         { this.props.children }
       </div>

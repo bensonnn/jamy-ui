@@ -34,6 +34,9 @@ class SoundManager extends React.Component {
       autoLoad: true,
       autoPlay: false,
       onfinish: this.props.next,
+      onload: (success) => {
+        if (!success) this.props.next();
+      },
       volume: 100
     }).play();
   }

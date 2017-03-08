@@ -6,7 +6,7 @@ $tablet = 750px
 $desktop = 100px
 
 .page
-  margin 2*$gutter 0 7*$gutter
+  margin 2*$gutter 0 6*$gutter
 
 .header
     .logo
@@ -15,24 +15,34 @@ $desktop = 100px
       font-weight: bold;
       letter-spacing: .5rem;
       text-transform: none;
-      border: 1px solid;
-      padding: 5px 6px 6px 9px;
+      display block
 
     a
-        text-decoration none
-        text-transform uppercase
-        font-size 12px
-        font-weight 500
-        letter-spacing .2rem
-        text-decoration none
-        line-height 4.5rem
-        color #222
-        display block
-        text-align center
-        &:hover
-            color lighten(#222, 30)
+      padding 10px
+      padding-right "calc(%s - .2rem)" % 10px // extra padding on edge of text
+      text-decoration none
+      text-transform uppercase
+      font-size 12px
+      font-weight 500
+      letter-spacing .2rem
+      line-height 12px
+      text-decoration none
+      color #222
+      display block
+      text-align center
+      margin-bottom $gutter
+      &:hover
+          color lighten(#222, 30)
+      &.active
+        border-width: 1px;
+        border-image: linear-gradient(to bottom right, #499bea 0%, #3bb3d2 29%, #37bacb 38%, #21e1a4 86%, #20e3a2 88%)
+        border-style: solid;
+        border-image-slice: 1;
+
+
     .links
         border-bottom: 1px solid #E1E1E1;
+        padding 4*$gutter 0 3*$gutter
         display flex
         flex-direction column
 
@@ -40,8 +50,10 @@ $desktop = 100px
         .links
             flex-direction row
             a
-                line-height 6.5rem
-                margin-right 6*$gutter
+              margin-right 3*$gutter
+              &:last-child
+                margin-right 0
+
 
 .controls
   position fixed
@@ -55,6 +67,10 @@ $desktop = 100px
   animation-name slide-up
   animation-fill-mode both
   animation-duration .5s
+  z-index 10
+
+  .title
+    color: lighten(#222, 30)
 
   .fa
     padding 2*$gutter
@@ -65,6 +81,7 @@ $desktop = 100px
         color lighten(#222, 30)
 
 .pagination
+    margin-top $gutter
     display flex
     list-style none
     justify-content: center;
@@ -81,8 +98,12 @@ $desktop = 100px
 .track
   display flex
   border-bottom: 1px solid #E1E1E1;
-  height 18*$gutter
+  height 16*$gutter
+  padding $gutter
   align-items center
+  animation-name fade-in
+  animation-fill-mode both
+  animation-duration .5s
 
   .right
     display block
@@ -94,11 +115,15 @@ $desktop = 100px
     &:hover
         color lighten(#222, 30)
 
+    &.active
+        color: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(59,179,210,1) 29%, rgba(55,186,203,1) 38%, rgba(33,225,164,1) 86%, rgba(32,227,162,1) 88%);
+
 
   .username
-    font-weight bold
+    font-weight 500
   .title
-    font-weight 200
+    color lighten(#222, 30)
+
 
   .avatar
     margin-right 2*$gutter
